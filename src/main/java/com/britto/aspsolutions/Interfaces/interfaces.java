@@ -5,10 +5,13 @@
  */
 package com.britto.aspsolutions.Interfaces;
 
+import com.britto.aspsolutions.Validator.Checkeo;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.xml.validation.Validator;
 
 /**
  *
@@ -16,20 +19,20 @@ import javax.swing.JOptionPane;
  */
 public class interfaces extends javax.swing.JFrame {
     
-    JLabel[][] vocal;
-    JLabel[] word;
-    boolean win;
-    int iniciox [];
-    int inicioy [];
-    boolean direccion[];
-    
+    Checkeo check = new Checkeo();
+    private JLabel[][] vocal;
+    private JLabel word;         
+    private ArrayList<String> palabrasEncontradas = new ArrayList<>();    
+    private int cantidadPalabrasAgregar = 0;
+    private ArrayList<String> palabrasBuscar = new ArrayList<>();
+    private ArrayList<Integer> tamaño = new ArrayList<>();
+    private int conteo = 0;
     /**
-     * Creates new form interfaces  
+     * Creates new form interfaces 
      */
-    public interfaces() {
+    public interfaces() {        
         initComponents();
-        word = new JLabel[]{word1,word2,word3,word4,word5,word6,word7,word8,word9,word10}; 
-        load();
+        cargar();        
     }
 
     /**
@@ -42,392 +45,558 @@ public class interfaces extends javax.swing.JFrame {
     private void initComponents() {
 
         letter_soup = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        PanelPalabras = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        word5 = new javax.swing.JLabel();
-        word6 = new javax.swing.JLabel();
-        word7 = new javax.swing.JLabel();
-        word9 = new javax.swing.JLabel();
-        word8 = new javax.swing.JLabel();
-        word10 = new javax.swing.JLabel();
-        word1 = new javax.swing.JLabel();
-        word2 = new javax.swing.JLabel();
-        word3 = new javax.swing.JLabel();
-        word4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        letter_soup.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        letter_soup.setLayout(new java.awt.GridLayout(10, 14));
+        letter_soup.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        letter_soup.setLayout(new java.awt.GridLayout(20, 20));
 
-        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
+        PanelPalabras.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        PanelPalabras.setLayout(new java.awt.GridLayout(8, 2));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        jLabel1.setText("Words");
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("BIENVENIDOS A MI SOPA DE LETRAS ATT: DAVID BRITTO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
-
-        word5.setText("SISTEMAS");
-        word5.setToolTipText("");
-        word5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        word5.setOpaque(true);
-
-        word6.setText("DAVID");
-        word6.setToolTipText("");
-        word6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        word6.setOpaque(true);
-
-        word7.setText("BRITTO");
-        word7.setToolTipText("");
-        word7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        word7.setOpaque(true);
-
-        word9.setText("PHP");
-        word9.setToolTipText("");
-        word9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        word9.setOpaque(true);
-
-        word8.setText("SOLUTIONS");
-        word8.setToolTipText("");
-        word8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        word8.setOpaque(true);
-
-        word10.setText("ANGULAR");
-        word10.setToolTipText("");
-        word10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        word10.setOpaque(true);
-
-        word1.setText("DRAGON");
-        word1.setToolTipText("");
-        word1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        word1.setOpaque(true);
-
-        word2.setText("PHONE");
-        word2.setToolTipText("");
-        word2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        word2.setOpaque(true);
-
-        word3.setText("JAVA");
-        word3.setToolTipText("");
-        word3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        word3.setOpaque(true);
-
-        word4.setText("SPRING");
-        word4.setToolTipText("");
-        word4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        word4.setOpaque(true);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(word2)
-                            .addComponent(word1)
-                            .addComponent(word3)
-                            .addComponent(word4)
-                            .addComponent(word5)
-                            .addComponent(word6)
-                            .addComponent(word7)
-                            .addComponent(word10))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(word9)
-                            .addComponent(word8))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(word1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(word2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(word3)
-                .addGap(18, 18, 18)
-                .addComponent(word4)
-                .addGap(18, 18, 18)
-                .addComponent(word5)
-                .addGap(18, 18, 18)
-                .addComponent(word6)
-                .addGap(18, 18, 18)
-                .addComponent(word7)
-                .addGap(18, 18, 18)
-                .addComponent(word8)
-                .addGap(18, 18, 18)
-                .addComponent(word9)
-                .addGap(18, 18, 18)
-                .addComponent(word10)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
-        jLabel2.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        jLabel2.setText("Message");
-
-        jMenu1.setText("Menu");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Restart");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(156, 156, 156))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(letter_soup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(PanelPalabras, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(letter_soup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PanelPalabras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(letter_soup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(letter_soup, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void load(){
-        win = false;
-        iniciox = new int[10]; //Creamos el arreglo de enteros para guardar las posiciones de las palabras en x
-        inicioy = new int[10]; //Creamos el arreglo de enteros para guardar las posiciones de las palabras en y
-        direccion = new boolean[10]; //Para definir la dirección
-        sopa();
-        putWord();
-       emptySpace();        
+  
+    public void cargar(){        
+        cantidadPalabras(); //Recogemos la cantidad de palabras que el usuario va a buscar     
+        sopa(); // llenamos los Jlabel en el Jpanel                
+        ponerPalabras(); //Segun posiciones alazar vamos poniendo algunas palabras que el usuario quiene poner
+        emptySpace(); // Llenamos los espacios vacios
+        recorrerPanelBuscar(); //Buscamos las palabras ingresadas
     }
     
+    public void cantidadPalabras(){
+        JOptionPane.showMessageDialog(null, "Welcome | Bienvenido  Sopa de letras David Britto"); 
+        cantidadPalabrasAgregar = check.checkNumerosPalabras(); //Mandamos el mensaje de cuantas palabras quiere en caso de no tener un respuesta valida saltamos un error        
+        for (int i = 0; i < cantidadPalabrasAgregar; i++) {            
+            palabrasBuscar.add(check.checkStringPalabras(i + 1));
+            tamaño.add(palabrasBuscar.get(i).length());
+        }        
+        System.out.println("Palabras a buscar"+palabrasBuscar + " tamaño=" + tamaño);
+    }        
+
     public void sopa(){
         
-        vocal = new JLabel [10][14];
+        vocal = new JLabel [20][20];
         
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             
-            for (int j = 0; j < 14; j++) {
+            for (int j = 0; j < 20; j++) {
                 
                 vocal[i][j] = new JLabel("", javax.swing.SwingConstants.CENTER);// Creamos la casilla vacia y la alineamos centrada
                 vocal[i][j].setName(""); // El nombre se lo setiamos vacio 
                 vocal[i][j].setBackground(Color.white); //Le ponemos color negro de fondo
                 vocal[i][j].setFont(new java.awt.Font("Arial", 1, 10));// tipo de letra
-                vocal[i][j].setBorder(new javax.swing.border.LineBorder(Color.white)); // color del bolder
-                vocal[i][j].setOpaque(true); // Para poder ver la letra
-                vocal[i][j].addMouseListener(new java.awt.event.MouseAdapter() { //Le ponemos una escucha a la casilla para saber cuando le esta dando click.
-                    public void mouseClicked(java.awt.event.MouseEvent evt){
-                        click(evt);
-                    }
-                });
+                vocal[i][j].setBorder(new javax.swing.border.LineBorder(Color.black)); // color del bolder
+                vocal[i][j].setOpaque(true); // Para poder ver la letra                
+                
                 letter_soup.add(vocal[i][j]);
             }
             
         }
     }
     
-    
-    /*
-    * Checkeamos si el usuario ya gano, si no vamos a confirmar si la casilla es color negro
-    * 
-    */   
-    public void click(java.awt.event.MouseEvent evt){
-        if (!win) {
-            if (evt.getComponent().getBackground().equals(Color.white)) { 
-                evt.getComponent().setBackground(Color.blue);
-                words();
-            }else if(evt.getComponent().getName().equals("")){
-                evt.getComponent().setBackground(Color.white);
-            }
-        }
-    }
-            
-    
-    public void words(){       
-        for (int i = 0; i < 10; i++) {                        
-            
-            if (!word[i].getBackground().equals(Color.cyan)) {
-                if (pintarVocal(iniciox[i],inicioy[i],word[i].getText().length(),direccion[i])) {
-                    word[i].setBackground(Color.cyan);
-                    break;
+    public void emptySpace(){
+        //Arreglo que nos ayuda a poner las letras en la sopa        
+        String abc[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+        Random random = new Random();
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                if (vocal[i][j].getName().equals("")) {
+                    vocal[i][j].setText(abc[(int) (random.nextDouble()*abc.length-1)]);                    
                 }
             }
         }
-        
-        boolean won = true; // Nos ayuda a saber si el usuario ya gano e juego
-        
-        for (int i = 0; i < vocal.length; i++) {
-            
-            if (!word[i].getBackground().equals(Color.cyan)) {
-                won=false;
-                break;
-            }
-            
-        }
-        
-        if (won) {
-            JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-            win = true;
-        }
     }
     
-    public boolean pintarVocal(int x, int y, int tamaño, boolean direccion){
-        boolean respuesta = true;
+    public void recorrerPanelBuscar(){
         
-        System.out.println("X=" + x + "; Y=" + y + "; tamaño=" + tamaño + "; dirección=" + direccion);
-        
-        if (direccion) {
-            for (int i = y; i < tamaño+y; i++) {
-                if (vocal[x][i].getBackground().equals(Color.white)) {
-                    respuesta=false;
-                    break;
+        for (int k = 0; k < cantidadPalabrasAgregar; k++) {
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {                
+                    if (vocal[i][j].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(0))) {
+                        buscar(i,j);                    
+                    }
                 }
+                            
+            }
+        }
+        
+        System.out.println("CONTEO = " + conteo);
+        //llenamos el Jlabel de las palabras
+        if (conteo <= 0) {
+            JOptionPane.showMessageDialog(null, "No se encontro ninguna palabra");
+        }
+        llenarJlabel();
+                        
+    }
+    
+    public void llenarJlabel(){
+        
+        
+        if (!palabrasEncontradas.isEmpty()) {
+            for (int i = 0; i < palabrasEncontradas.size(); i++) {
+                word = new JLabel();
+                word.setName("palabra1");
+                word.setText(""+palabrasEncontradas.get(i));
+                word.setBackground(Color.white);
+                word.setFont(new java.awt.Font("Arial", 1, 10));
+                word.setBorder(new javax.swing.border.LineBorder(Color.black));
+                word.setOpaque(true);
+                PanelPalabras.add(word); 
             }
         }else{
-            for (int i = y; i >y-tamaño; i++) {
-                if (vocal[x][i].getBackground().equals(Color.white)) {
-                    respuesta=false;
-                    break;
-                }
-            }
-        }
-        
-        x = 0;
-        y= 0;
-        tamaño = 0;         
-        return respuesta;
-    }
-    
-    
-    public void putWord(){
-        String  wordPut[] = {word1.getText(),word2.getText(),word3.getText(),word4.getText(),word5.getText(),
-        word6.getText(),word7.getText(),word8.getText(),word9.getText(),word10.getText()};        
-        Random random = new Random(); // Para ubicar las palabras en diferentes lugares        
-        int startx = 0; //posicion x donde inicia la palabra
-        int starty; //posicion y donde inicia la palabra
-        int unique[] = numerosSinRepeticiones(10);// evita que la fila se genere mas de una vez
-        iniciox = unique;
-        
-        for (int i = 0; i < wordPut.length; i++) {
-            if (wordPut[i].length() < 14) {
-                startx=unique[i];
-                starty= (int) (random.nextDouble() * 14-1);
-                int estrae =0;
-                
-                if (starty+wordPut[i].length() < 14) {
-                    for (int j = starty; j < starty+wordPut[i].length(); j++) {
-                        vocal[startx][j].setText(wordPut[i].substring(estrae, estrae+1));
-                        vocal[startx][j].setName("1");
-                        estrae++;
-                        inicioy[i] = starty;
-                        direccion[i] = true;
-                    }
-                } else if (starty - wordPut[i].length() > 0) {
-                    for (int j = starty; j > starty-wordPut[i].length(); j--) {
-                        vocal[startx][j].setText(wordPut[i].substring(estrae, estrae+1));
-                        vocal[startx][j].setName("1");
-                        estrae++;
-                        inicioy[i] = starty;
-                        direccion[i] = false;
-                    }
-                }
-            }
+                word = new JLabel();
+                word.setName("palabra1");
+                word.setText("No se encontraron palabras");
+                word.setBackground(Color.white);
+                word.setFont(new java.awt.Font("Arial", 1, 10));
+                word.setBorder(new javax.swing.border.LineBorder(Color.black));
+                word.setOpaque(true);
+                PanelPalabras.add(word);
         }
     }
     
-    
-    
-    public int[] numerosSinRepeticiones(int repetitions){
-        
-        int numbers[] = new int [repetitions];
-        
-        for (int i = 0; i < repetitions; i++) {
-            numbers[i]=-1;
-        }
-        
-        Random random = new Random();
-        
-        boolean aux ; // para saber si la fila esta repetida o no
+    public void buscar(int i, int j){
+        int t=0;
+        int finish =0;
         
         
-        int number = 0;
-        
-        for (int i = 0; i < repetitions; i++) {
-            
-            aux = true;
-            
-            while(aux){
-                aux = false;
-                
-                number = (int) (random.nextDouble()*11-1);
-                
-                for (int j = 0; j < numbers.length; j++) {
-                    if (numbers[j] == number) {
-                        aux = true;
-                        break;
+         for (int k = 0; k < cantidadPalabrasAgregar; k++) {
+            //Izquierda a Derecha
+            if (10 - j >=tamaño.get(k)) {
+                while(t < tamaño.get(k) && vocal[i][j+t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
+                if (t==tamaño.get(k)) {
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                       vocal[i][j+l].setBackground(Color.ORANGE);
                     }
+                    
+                    finish = tamaño.get(k) - 1;
+                    conteo++;
+                    palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
+                             " Posicion Final [" + i + "]" + "[" + (j+finish) + "]" + "\n");
                 }
             }
-            
-            numbers[i]  = number;
-        }
+
+            //Derecha a Izquierda
+            t=0;
+            if (j + 1 >=tamaño.get(k)) {
+                while(t < tamaño.get(k) && vocal[i][j-t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
+                if (t==tamaño.get(k)) {
+
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                       vocal[i][j-l].setBackground(Color.ORANGE);
+                    }
+
+                    finish = tamaño.get(k) - 1;
+                    conteo++;
+                    palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
+                            " Posicion Final [" + i + "]" + "[" + (j-finish) + "]");
+                }
+            }
+
+            //Arriba
+            t=0;
+            if (i + 1 >=tamaño.get(k)) {
+                while(t < tamaño.get(k) && vocal[i-t][j].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
+                if (t==tamaño.get(k)) {
+
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                       vocal[i-l][j].setBackground(Color.ORANGE);
+                    }
+
+                    finish = tamaño.get(k) - 1;
+                    conteo++;
+                    palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
+                            " Posicion Final [" + (i-finish) + "]" + "[" + j + "]");
+                }
+            }
+
+
+
+            //Abajo
+            t=0;
+            if (20 - i >=tamaño.get(k)) {
+                while(t < tamaño.get(k) && vocal[i+t][j].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
+                if (t==tamaño.get(k)) {
+
+                     for (int l = 0; l < tamaño.get(k); l++) {
+                        vocal[i+l][j].setBackground(Color.ORANGE);
+                     }
+                     
+                    finish = tamaño.get(k) - 1;
+                    conteo++;
+                    palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
+                            " Posicion Final [" + (i+finish) + "]" + "[" + j + "]");
+                     
+                }
+            }
+
+            //Arriba - Derecha
+            t=0;
+            if (i + 1 >=tamaño.get(k) && 20 - j >=tamaño.get(k)) {
+                while(t < tamaño.get(k) && vocal[i-t][j+t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
+                if (t==tamaño.get(k)) {
+
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                       vocal[i-l][j+l].setBackground(Color.ORANGE);
+                    }
+                    
+                    finish = tamaño.get(k) - 1;
+                    conteo++;
+                    palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
+                            " Posicion Final [" + (i-finish) + "]" + "[" + (j+finish) + "]");
+                }
+            }
+
+            //Arriba - Izquierda
+            t=0;
+            if (i + 1 >=tamaño.get(k) && j + 1 >=tamaño.get(k)) {
+                while(t < tamaño.get(k) && vocal[i-t][j-t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
+                if (t==tamaño.get(k)) {
+
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                       vocal[i-l][j-l].setBackground(Color.ORANGE);
+                    }
+                    
+                    finish = tamaño.get(k) - 1;
+                    conteo++;
+                    palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
+                            " Posicion Final [" + (i-finish) + "]" + "[" + (j-finish) + "]");
+                }
+            }
+
+            //Abajo - Derecha
+            t=0;
+            if (20 - i >=tamaño.get(k) && 20 - j >=tamaño.get(k)) {
+                while(t < tamaño.get(k) && vocal[i+t][j+t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
+                if (t==tamaño.get(k)) {
+
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                       vocal[i+l][j+l].setBackground(Color.ORANGE);
+                    }
+                    
+                    finish = tamaño.get(k) - 1;
+                    conteo++;
+                    palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
+                            " Posicion Final [" + (i+finish) + "]" + "[" + (j+finish) + "]");
+                }
+            }
+
+            //Abajo - Izquierda
+            t=0;
+            if (20 - i >=tamaño.get(k) && j + 1 >=tamaño.get(k)) {
+                while(t < tamaño.get(k) && vocal[i+t][j-t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
+                if (t==tamaño.get(k)) {
+
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                       vocal[i+l][j-l].setBackground(Color.ORANGE);
+                    }
+                    
+                    finish = tamaño.get(k) - 1;
+                    conteo++;
+                    palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
+                            " Posicion Final [" + (i+finish) + "]" + "[" + (j-finish) + "]");
+                }
+            } 
+             
+        }        
+    }
+    
+    public void ponerPalabras(){        
+        Random ra = new Random();
+        int i = 0; //posicion alazar en x
+        int j = 0; //posicion alazar en y
+        int r = (int) (ra.nextDouble()*21-1); // Para definir si colocamos las palabras o no        
+        double result = r%2; //S es multiplo de 2 insertamos algunas palabras si no, entonces no insertamos nada
+        int b=0; //Variable bandera que nos sirve para saber si la palabra ya se inserto en x ubicacin para no volverla a insertar
+        int z=0; //Variable bandera que nos sirve para saber si la ubicación que se tiene pensado poner la palabra ya esta ocupado
+        int arribaDerecha = 0;
+        int derechaIzquierda = 0;
+        int izquierdaDerecha = 0;
+        int arriba = 0;
+        int abajo = 0;
         
-        return numbers;
+        System.out.println("result=" + result);
+        
+        if (result == 0) { //si el resultado del random es un multiplo de 2 insertamos algunas palabras
+            
+            System.out.println("Vamos a insertar la palabra en la sopa");
+            
+            // Hacemos un ciclo para la cantidad de palabras a insertar
+            for (int k = 0; k < cantidadPalabrasAgregar; k++) {
+                
+                // posiciones random
+                i = (int) (ra.nextDouble()*21-1);
+                j = (int) (ra.nextDouble()*21-1);
+                b=0;
+                
+                z=0; // ponemos a z como 0 nuevamente               
+                //Arriba - Derecha - verificamos que la palabra quepa  
+                if (i + 1 >=tamaño.get(k) && 20 - j >=tamaño.get(k) && arribaDerecha ==0) {
+                    
+                    //Verificamos que no haya ya escrita una palabra en la ubicación
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                         if (vocal[i-l][j+l].getName().equalsIgnoreCase("1")) {
+                             z = 1;
+                             break;                            
+                         }
+                    }
+                    
+                    if (z == 1) {
+                        System.out.println("Espacio ocupado = Arriba - Derecha");
+                    }else{
+                        for (int t = 0; t < tamaño.get(k); t++) {
+                            vocal[i-t][j+t].setText(""+palabrasBuscar.get(k).charAt(t));
+                            vocal[i-t][j+t].setName("1");                            
+                        }
+                        b=1;
+                        arribaDerecha = 1;
+                        System.out.println("Se inserto = Arriba - Derecha");
+                    }                                        
+                }
+                
+                z=0; // ponemos a z como 0 nuevamente
+                //Izquierda a Derecha - verificamos que la palabra quepa                
+                if (20 - j >=tamaño.get(k) && izquierdaDerecha==0 && b==0) {
+                    
+                    //Verificamos que no haya ya escrita una palabra en la ubicación
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                        if (vocal[i][j+l].getName().equalsIgnoreCase("1")) {
+                            z = 1;
+                            break;                            
+                        }
+                    }
+                    
+                    if (z == 1) {
+                        System.out.println("Espacio ocupado - Izquierda a Derecha");
+                    }else{
+                       for (int t = 0; t < tamaño.get(k); t++) {                                                                        
+                            vocal[i][j+t].setText(""+palabrasBuscar.get(k).charAt(t));
+                            vocal[i][j+t].setName("1");                            
+                        }                
+                        b=1;
+                        izquierdaDerecha = 1;
+                        System.out.println("Se inserto - Izquierda a Derecha"); 
+                    }
+                }
+                
+                z=0; // ponemos a z como 0 nuevamente                
+                //Derecha a Izquierda - verificamos que la palabra quepa  
+                if (j + 1 >=tamaño.get(k) && b == 0 && derechaIzquierda ==0) {
+                    
+                    //Verificamos que no haya ya escrita una palabra en la ubicación
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                        if (vocal[i][j-l].getName().equalsIgnoreCase("1")) {
+                            z = 1;
+                            break;                            
+                        }
+                    }
+                    
+                    if (z == 1) {
+                        System.out.println("Espacio ocupado - Derecha a Izquierda");
+                    }else{
+                        for (int t = 0; t < tamaño.get(k); t++) {
+                            vocal[i][j-t].setText(""+palabrasBuscar.get(k).charAt(t));
+                            vocal[i][j-t].setName("1");                            
+                        }                        
+                        b=1;
+                        derechaIzquierda = 1;
+                        System.out.println("Se inserto - Derecha a Izquierda");
+                    }                    
+                    
+                }
+
+                z=0; // ponemos a z como 0 nuevamente                
+                //Arriba - verificamos que la palabra quepa  
+                if (i + 1 >=tamaño.get(k) && b == 0 && arriba ==0) {
+                    
+                    //Verificamos que no haya ya escrita una palabra en la ubicación
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                         if (vocal[i-l][j].getName().equalsIgnoreCase("1")) {
+                             z = 1;
+                             break;                            
+                         }
+                    }
+                   
+                    if (z == 1) {
+                        System.out.println("Espacio ocupado - Arriba");
+                    }else{
+                        for (int t = 0; t < tamaño.get(k); t++) {              
+                            vocal[i-t][j].setText(""+palabrasBuscar.get(k).charAt(t));
+                            vocal[i-t][j].setName("1");                            
+                        }
+                        b=1;
+                        arriba = 1;
+                        System.out.println("Se inserto Arriba");
+                    }
+                }
+                
+                z=0; // ponemos a z como 0 nuevamente                
+                //Abajo - verificamos que la palabra quepa  
+                if (20 - i >=tamaño.get(k) && b == 0 && abajo ==0) {
+                    
+                    //Verificamos que no haya ya escrita una palabra en la ubicación
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                         if (vocal[i+l][j].getName().equalsIgnoreCase("1")) {
+                             z = 1;
+                             break;                            
+                         }
+                    }
+                    
+                    if (z == 1) {
+                        System.out.println("Espacio ocupado - Abajo");
+                    }else{
+                        for (int t = 0; t < tamaño.get(k); t++) {               
+                            vocal[i+t][j].setText(""+palabrasBuscar.get(k).charAt(t));
+                            vocal[i+t][j].setName("1");                            
+                        }
+                        b=1;
+                        abajo = 1;
+                        System.out.println("Se inserto - Abajo");
+                    }                    
+                }
+                
+                z=0; // ponemos a z como 0 nuevamente                
+                //Arriba - Izquierda - verificamos que la palabra quepa  
+                if (i + 1 >=tamaño.get(k) && j + 1 >=tamaño.get(k)) {
+                    
+                    //Verificamos que no haya ya escrita una palabra en la ubicación
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                         if (vocal[i-l][j-l].getName().equalsIgnoreCase("1")) {
+                             z = 1;
+                             break;                            
+                         }
+                    }
+                    
+                    if (z == 1) {
+                        System.out.println("Espacio ocupado = Arriba - Izquierda");
+                    }else{
+                        for (int t = 0; t < tamaño.get(k); t++) {
+                            vocal[i-t][j-t].setText(""+palabrasBuscar.get(k).charAt(t));
+                            vocal[i-t][j-t].setName("1");                            
+                        }
+
+                        b=1;
+                        System.out.println("Se inserto = Arriba - Izquierda");
+                    }                                         
+                }
+                
+                z=0; // ponemos a z como 0 nuevamente
+                
+                //Abajo - Derecha - verificamos que la palabra quepa  
+                if (20 - i >=tamaño.get(k) && 20 - j >=tamaño.get(k)) {
+                    
+                    //Verificamos que no haya ya escrita una palabra en la ubicación
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                         if (vocal[i+l][j+l].getName().equalsIgnoreCase("1")) {
+                             z = 1;
+                             break;                            
+                         }
+                    }
+                    
+                    if (z == 1) {
+                        System.out.println("Espacio ocupado = Abajo - Derecha");
+                    }else{
+                        for (int t = 0; t < tamaño.get(k); t++) {
+                            vocal[i+t][j+t].setText(""+palabrasBuscar.get(k).charAt(t));
+                            vocal[i+t][j+t].setName("1");                            
+                        }
+
+                        b=1;
+                        System.out.println("Se inserto = Abajo - Derecha");
+                    }                                        
+                }
+                
+                z=0; // ponemos a z como 0 nuevamente
+                
+                //Abajo - Izquierda - verificamos que la palabra quepa  
+                if (20 - i >=tamaño.get(k) && j + 1 >=tamaño.get(k)) {
+                    
+                    //Verificamos que no haya ya escrita una palabra en la ubicación
+                    for (int l = 0; l < tamaño.get(k); l++) {
+                         if (vocal[i+l][j-l].getName().equalsIgnoreCase("1")) {
+                             z = 1;
+                             break;                            
+                         }
+                    }
+                    
+                    if (z == 1) {
+                        System.out.println("Espacio ocupado = Abajo - Izquierda");
+                    }else{
+                        for (int t = 0; t < tamaño.get(k); t++) {
+                            vocal[i+t][j-t].setText(""+palabrasBuscar.get(k).charAt(t));
+                            vocal[i+t][j-t].setName("1");                            
+                        }
+
+                        b=1;
+                        System.out.println("Se inserto = Abajo - Izquierda");
+                    }                                        
+                }
+                
+                if (b == 0) {
+                    System.out.println("No se´pudo insertar la palabra= "+ palabrasBuscar.get(k));
+                }
+                
+            }
+              
+            if (b == 0) {
+                    System.out.println("No se´inserto ninguna palabra");
+            }
+        }                
          
     }
-            
-    
-    public void emptySpace(){
-        //Arreglo que nos ayuda a poner las letras en la sopa
-        
-        String abc[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 14; j++) {
-                if (vocal[i][j].getName().equals("")) {
-                    vocal[i][j].setText(abc[(int) (random.nextDouble()*abc.length-1)]);
-                }
-            }
-        }
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -454,6 +623,9 @@ public class interfaces extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(interfaces.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -462,25 +634,11 @@ public class interfaces extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelPalabras;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel letter_soup;
-    private javax.swing.JLabel word1;
-    private javax.swing.JLabel word10;
-    private javax.swing.JLabel word2;
-    private javax.swing.JLabel word3;
-    private javax.swing.JLabel word4;
-    private javax.swing.JLabel word5;
-    private javax.swing.JLabel word6;
-    private javax.swing.JLabel word7;
-    private javax.swing.JLabel word8;
-    private javax.swing.JLabel word9;
     // End of variables declaration//GEN-END:variables
 }

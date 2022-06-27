@@ -11,7 +11,7 @@ import com.britto.aspsolutions.Interfaces.interfaces;
  *
  * @author britt
  */
-public class aspsolutions {
+public class Aspsolutions {
     
     public static void main(String[] args) {
         new interfaces().setVisible(true);
