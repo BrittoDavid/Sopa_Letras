@@ -163,14 +163,9 @@ public class interfaces extends javax.swing.JFrame {
     
     public void recorrerPanelBuscar(){
         
-        for (int k = 0; k < cantidadPalabrasAgregar; k++) {
-            for (int i = 0; i < 20; i++) {
-                for (int j = 0; j < 20; j++) {                
-                    if (vocal[i][j].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(0))) {
-                        buscar(i,j);                    
-                    }
-                }
-                            
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {                
+                 buscar(i,j);
             }
         }
         
@@ -212,11 +207,11 @@ public class interfaces extends javax.swing.JFrame {
     public void buscar(int i, int j){
         int t=0;
         int finish =0;
-        
+        int b=0;
         
          for (int k = 0; k < cantidadPalabrasAgregar; k++) {
             //Izquierda a Derecha
-            if (10 - j >=tamaño.get(k)) {
+            if (10 - j >=tamaño.get(k) && b==0) {
                 while(t < tamaño.get(k) && vocal[i][j+t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
                 if (t==tamaño.get(k)) {
                     for (int l = 0; l < tamaño.get(k); l++) {
@@ -225,6 +220,7 @@ public class interfaces extends javax.swing.JFrame {
                     
                     finish = tamaño.get(k) - 1;
                     conteo++;
+                    b=1;
                     palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
                              " Posicion Final [" + i + "]" + "[" + (j+finish) + "]" + "\n");
                 }
@@ -232,7 +228,7 @@ public class interfaces extends javax.swing.JFrame {
 
             //Derecha a Izquierda
             t=0;
-            if (j + 1 >=tamaño.get(k)) {
+            if (j + 1 >=tamaño.get(k) && b == 0) {
                 while(t < tamaño.get(k) && vocal[i][j-t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
                 if (t==tamaño.get(k)) {
 
@@ -242,6 +238,7 @@ public class interfaces extends javax.swing.JFrame {
 
                     finish = tamaño.get(k) - 1;
                     conteo++;
+                    b=1;
                     palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
                             " Posicion Final [" + i + "]" + "[" + (j-finish) + "]");
                 }
@@ -249,7 +246,7 @@ public class interfaces extends javax.swing.JFrame {
 
             //Arriba
             t=0;
-            if (i + 1 >=tamaño.get(k)) {
+            if (i + 1 >=tamaño.get(k) && b ==0) {
                 while(t < tamaño.get(k) && vocal[i-t][j].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
                 if (t==tamaño.get(k)) {
 
@@ -259,6 +256,7 @@ public class interfaces extends javax.swing.JFrame {
 
                     finish = tamaño.get(k) - 1;
                     conteo++;
+                    b=1;
                     palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
                             " Posicion Final [" + (i-finish) + "]" + "[" + j + "]");
                 }
@@ -268,7 +266,7 @@ public class interfaces extends javax.swing.JFrame {
 
             //Abajo
             t=0;
-            if (20 - i >=tamaño.get(k)) {
+            if (20 - i >=tamaño.get(k) && b ==0) {
                 while(t < tamaño.get(k) && vocal[i+t][j].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
                 if (t==tamaño.get(k)) {
 
@@ -278,6 +276,7 @@ public class interfaces extends javax.swing.JFrame {
                      
                     finish = tamaño.get(k) - 1;
                     conteo++;
+                    b=1;
                     palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
                             " Posicion Final [" + (i+finish) + "]" + "[" + j + "]");
                      
@@ -286,7 +285,7 @@ public class interfaces extends javax.swing.JFrame {
 
             //Arriba - Derecha
             t=0;
-            if (i + 1 >=tamaño.get(k) && 20 - j >=tamaño.get(k)) {
+            if (i + 1 >=tamaño.get(k) && 20 - j >=tamaño.get(k) && b ==0) {
                 while(t < tamaño.get(k) && vocal[i-t][j+t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
                 if (t==tamaño.get(k)) {
 
@@ -296,6 +295,7 @@ public class interfaces extends javax.swing.JFrame {
                     
                     finish = tamaño.get(k) - 1;
                     conteo++;
+                    b=1;
                     palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
                             " Posicion Final [" + (i-finish) + "]" + "[" + (j+finish) + "]");
                 }
@@ -303,7 +303,7 @@ public class interfaces extends javax.swing.JFrame {
 
             //Arriba - Izquierda
             t=0;
-            if (i + 1 >=tamaño.get(k) && j + 1 >=tamaño.get(k)) {
+            if (i + 1 >=tamaño.get(k) && j + 1 >=tamaño.get(k) && b ==0) {
                 while(t < tamaño.get(k) && vocal[i-t][j-t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
                 if (t==tamaño.get(k)) {
 
@@ -313,6 +313,7 @@ public class interfaces extends javax.swing.JFrame {
                     
                     finish = tamaño.get(k) - 1;
                     conteo++;
+                    b=1;
                     palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
                             " Posicion Final [" + (i-finish) + "]" + "[" + (j-finish) + "]");
                 }
@@ -320,7 +321,7 @@ public class interfaces extends javax.swing.JFrame {
 
             //Abajo - Derecha
             t=0;
-            if (20 - i >=tamaño.get(k) && 20 - j >=tamaño.get(k)) {
+            if (20 - i >=tamaño.get(k) && 20 - j >=tamaño.get(k) && b ==0) {
                 while(t < tamaño.get(k) && vocal[i+t][j+t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
                 if (t==tamaño.get(k)) {
 
@@ -330,6 +331,7 @@ public class interfaces extends javax.swing.JFrame {
                     
                     finish = tamaño.get(k) - 1;
                     conteo++;
+                    b=1;
                     palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
                             " Posicion Final [" + (i+finish) + "]" + "[" + (j+finish) + "]");
                 }
@@ -337,7 +339,7 @@ public class interfaces extends javax.swing.JFrame {
 
             //Abajo - Izquierda
             t=0;
-            if (20 - i >=tamaño.get(k) && j + 1 >=tamaño.get(k)) {
+            if (20 - i >=tamaño.get(k) && j + 1 >=tamaño.get(k) && b ==0) {
                 while(t < tamaño.get(k) && vocal[i+t][j-t].getText().equalsIgnoreCase(""+palabrasBuscar.get(k).charAt(t))){t++;}
                 if (t==tamaño.get(k)) {
 
@@ -347,6 +349,7 @@ public class interfaces extends javax.swing.JFrame {
                     
                     finish = tamaño.get(k) - 1;
                     conteo++;
+                    b=1;
                     palabrasEncontradas.add(palabrasBuscar.get(k) + " Posicion inicial [" + i + "]" + "[" + j + "]" +
                             " Posicion Final [" + (i+finish) + "]" + "[" + (j-finish) + "]");
                 }
