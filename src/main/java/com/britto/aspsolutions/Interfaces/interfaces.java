@@ -107,11 +107,12 @@ public class interfaces extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  
+    
+   
     public void cargar(){        
         cantidadPalabras(); //Recogemos la cantidad de palabras que el usuario va a buscar     
         sopa(); // llenamos los Jlabel en el Jpanel                
-        ponerPalabras(); //Segun posiciones alazar vamos poniendo algunas palabras que el usuario quiene poner
+        ponerPalabras(); //Segun posiciones alazar vamos poniendo algunas palabras que el usuario va a buscar si se cumple la condición de insertar las palabras si no, no nsertamos ninguna
         emptySpace(); // Llenamos los espacios vacios
         recorrerPanelBuscar(); //Buscamos las palabras ingresadas
     }
@@ -358,8 +359,7 @@ public class interfaces extends javax.swing.JFrame {
         Random ra = new Random();
         int i = 0; //posicion alazar en x
         int j = 0; //posicion alazar en y
-        int r = (int) (ra.nextDouble()*21-1); // Para definir si colocamos las palabras o no        
-        double result = r%2; //S es multiplo de 2 insertamos algunas palabras si no, entonces no insertamos nada
+        int r = ra.nextInt(1,4); // Para definir si colocamos las palabras o no        
         int b=0; //Variable bandera que nos sirve para saber si la palabra ya se inserto en x ubicacin para no volverla a insertar
         int z=0; //Variable bandera que nos sirve para saber si la ubicación que se tiene pensado poner la palabra ya esta ocupado
         int arribaDerecha = 0;
@@ -368,9 +368,9 @@ public class interfaces extends javax.swing.JFrame {
         int arriba = 0;
         int abajo = 0;
         
-        System.out.println("result=" + result);
+        System.out.println("result=" + r);
         
-        if (result == 0) { //si el resultado del random es un multiplo de 2 insertamos algunas palabras
+        if (r == 0 || r == 1 || r == 2) {
             
             System.out.println("Vamos a insertar la palabra en la sopa");
             
